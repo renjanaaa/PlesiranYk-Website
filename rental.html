@@ -56,13 +56,13 @@
                             <label for="carSelect">Pilih Mobil</label>
                             <select id="carSelect" name="text" required>
                                 <option value="">Pilih Mobil</option>
-                                <option value="Saya ingin menyewa Toyota Hiace Commuter - Rp 1.200.000/hari">Toyota Hiace Commuter - Rp 1.200.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Hiace Premio - Rp 1.600.000/hari">Toyota Hiace Premio - Rp 1.600.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Avanza Facelift 2019 - Rp 600.000/hari">Toyota Avanza Facelift 2019 - Rp 600.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota All New Avanza 2024 - Rp 700.000/hari">Toyota All New Avanza 2024 - Rp 700.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Innova Reborn - Rp 700.000/hari">Toyota Innova Reborn - Rp 700.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Innova Zenix - Rp 900.000/hari">Toyota Innova Zenix - Rp 900.000/hari</option>
-                                <option value="Saya ingin menyewa Daihatsu Grand Max - Rp 550.000/hari">Daihatsu Grand Max - Rp 550.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Hiace Commuter - Rp 1.200.000/hari" data-car="Toyota Hiace Commuter" data-price="1200000">Toyota Hiace Commuter - Rp 1.200.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Hiace Premio - Rp 1.600.000/hari" data-car="Toyota Hiace Premio" data-price="1600000">Toyota Hiace Premio - Rp 1.600.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Avanza Facelift 2019 - Rp 600.000/hari" data-car="Toyota Avanza Facelift 2019" data-price="600000">Toyota Avanza Facelift 2019 - Rp 600.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota All New Avanza 2024 - Rp 700.000/hari" data-car="Toyota All New Avanza 2024" data-price="700000">Toyota All New Avanza 2024 - Rp 700.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Innova Reborn - Rp 700.000/hari" data-car="Toyota Innova Reborn" data-price="700000">Toyota Innova Reborn - Rp 700.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Innova Zenix - Rp 900.000/hari" data-car="Toyota Innova Zenix" data-price="900000">Toyota Innova Zenix - Rp 900.000/hari</option>
+                                <option value="Saya ingin menyewa Daihatsu Grand Max - Rp 550.000/hari" data-car="Daihatsu Grand Max" data-price="550000">Daihatsu Grand Max - Rp 550.000/hari</option>
                             </select>
                         </div>
 
@@ -148,7 +148,7 @@
                     <div class="rental-terms">
                         <h4>Syarat & Ketentuan:</h4>
                         <ul>
-                            <li>KTP dan SIM A masih berlaku</li>
+                            <li>Tidak Berlaku Lepas Kunci</li>
                             <li>Deposit Rp 500.000</li>
                             <li>Harga sudah termasuk Driver + BBM + Mobil</li>
                             <li>Khusus untuk City Tour Jogja</li>
@@ -207,21 +207,11 @@ const startDate = document.getElementById('startDate');
 const endDate = document.getElementById('endDate');
 const pickupLocationSelect = document.getElementById('pickupLocation');
 
-// Updated price mapping
-const carPrices = {
-    'Toyota Hiace Commuter': 1200000,
-    'Toyota Hiace Premio': 1600000,
-    'Toyota Avanza Facelift 2019': 600000,
-    'Toyota All New Avanza 2024': 700000,
-    'Toyota Innova Reborn': 700000,
-    'Toyota Innova Zenix': 900000,
-    'Daihatsu Grand Max': 550000
-};
-
 function updateBookingDetails() {
-    const selectedCarOption = carSelect.options[carSelect.selectedIndex];
-    const selectedCarText = selectedCarOption.text;
-    const carName = selectedCarText.split(' - ')[0];
+    const selectedOption = carSelect.options[carSelect.selectedIndex];
+    const carName = selectedOption.getAttribute('data-car');
+    const carPrice = parseInt(selectedOption.getAttribute('data-price')) || 0;
+    
     const startDateValue = startDate.value;
     const endDateValue = endDate.value;
     const pickupLocationOption = pickupLocationSelect.options[pickupLocationSelect.selectedIndex];
@@ -239,7 +229,6 @@ function updateBookingDetails() {
     
     // Update rental dates
     if (startDateValue && endDateValue) {
-        // Format dates to Indonesian format
         const startFormatted = new Date(startDateValue).toLocaleDateString('id-ID');
         const endFormatted = new Date(endDateValue).toLocaleDateString('id-ID');
         document.getElementById('rentalDates').textContent = `${startFormatted} s/d ${endFormatted}`;
@@ -250,46 +239,40 @@ function updateBookingDetails() {
         document.getElementById('rentalDates').textContent = '-';
     }
     
-    // Calculate duration and prices
-    if (startDateValue && endDateValue) {
+    // Show daily price if car is selected
+    if (carPrice > 0) {
+        document.getElementById('dailyPrice').textContent = `Rp ${carPrice.toLocaleString('id-ID')}`;
+    } else {
+        document.getElementById('dailyPrice').textContent = 'Rp -';
+    }
+    
+    // Calculate duration and total price
+    if (startDateValue && endDateValue && carPrice > 0) {
         const start = new Date(startDateValue);
         const end = new Date(endDateValue);
+        
+        // Calculate days difference - minimum 1 day for same day rental
         const timeDiff = end.getTime() - start.getTime();
-        const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        let dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        
+        // If same day (0 difference), treat as 1 day rental
+        if (dayDiff === 0) {
+            dayDiff = 1;
+        }
         
         if (dayDiff > 0) {
             document.getElementById('rentalDuration').textContent = `${dayDiff} hari`;
-            
-            // Calculate price if car is selected
-            if (carName && carPrices[carName]) {
-                const dailyPrice = carPrices[carName];
-                const totalPrice = dailyPrice * dayDiff;
-                
-                document.getElementById('dailyPrice').textContent = `Rp ${dailyPrice.toLocaleString('id-ID')}`;
-                document.getElementById('totalPrice').textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
-            } else {
-                document.getElementById('dailyPrice').textContent = 'Rp -';
-                document.getElementById('totalPrice').textContent = 'Rp 0';
-            }
+            const totalPrice = carPrice * dayDiff;
+            document.getElementById('totalPrice').textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
         } else {
-            resetDurationAndPrice();
+            // This should not happen with the fix above, but keeping as fallback
+            document.getElementById('rentalDuration').textContent = '- hari';
+            document.getElementById('totalPrice').textContent = 'Rp 0';
         }
     } else {
-        resetDurationAndPrice();
-        
-        // Still show daily price if car is selected
-        if (carName && carPrices[carName]) {
-            const dailyPrice = carPrices[carName];
-            document.getElementById('dailyPrice').textContent = `Rp ${dailyPrice.toLocaleString('id-ID')}`;
-        } else {
-            document.getElementById('dailyPrice').textContent = 'Rp -';
-        }
+        document.getElementById('rentalDuration').textContent = '- hari';
+        document.getElementById('totalPrice').textContent = 'Rp 0';
     }
-}
-
-function resetDurationAndPrice() {
-    document.getElementById('rentalDuration').textContent = '- hari';
-    document.getElementById('totalPrice').textContent = 'Rp 0';
 }
 
 // Set minimum date to today
