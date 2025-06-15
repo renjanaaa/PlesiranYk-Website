@@ -38,6 +38,10 @@
         <div class="container">
             <h1>Sewa Mobil</h1>
             <p>Pilih mobil yang sesuai dengan kebutuhan perjalanan Anda</p>
+            <div style="margin-top: 2rem; background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px;">
+                <p style="font-size: 1.2rem; margin: 0;"><strong>Harga sudah termasuk Driver + BBM + Mobil</strong></p>
+                <p style="font-size: 1rem; margin: 0.5rem 0 0 0; opacity: 0.9;"><em>Khusus untuk City Tour Jogja</em></p>
+            </div>
         </div>
     </section>
 
@@ -52,12 +56,11 @@
                             <label for="carSelect">Pilih Mobil</label>
                             <select id="carSelect" name="text" required>
                                 <option value="">Pilih Mobil</option>
-                                <option value="Saya ingin menyewa Toyota Hiace Commuter - Rp 1.350.000/hari">Toyota Hiace Commuter - Rp 1.350.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Hiace Premio - Rp 1.450.000/hari">Toyota Hiace Premio - Rp 1.450.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Hiace Commuter - Rp 1.200.000/hari">Toyota Hiace Commuter - Rp 1.200.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Hiace Premio - Rp 1.600.000/hari">Toyota Hiace Premio - Rp 1.600.000/hari</option>
                                 <option value="Saya ingin menyewa Toyota Avanza Facelift 2019 - Rp 600.000/hari">Toyota Avanza Facelift 2019 - Rp 600.000/hari</option>
                                 <option value="Saya ingin menyewa Toyota All New Avanza 2024 - Rp 700.000/hari">Toyota All New Avanza 2024 - Rp 700.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Innova Reborn M/T - Rp 700.000/hari">Toyota Innova Reborn M/T - Rp 700.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Innova Reborn A/T - Rp 750.000/hari">Toyota Innova Reborn A/T - Rp 750.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Innova Reborn - Rp 700.000/hari">Toyota Innova Reborn - Rp 700.000/hari</option>
                                 <option value="Saya ingin menyewa Toyota Innova Zenix - Rp 900.000/hari">Toyota Innova Zenix - Rp 900.000/hari</option>
                                 <option value="Saya ingin menyewa Daihatsu Grand Max - Rp 550.000/hari">Daihatsu Grand Max - Rp 550.000/hari</option>
                             </select>
@@ -147,9 +150,9 @@
                         <ul>
                             <li>KTP dan SIM A masih berlaku</li>
                             <li>Deposit Rp 500.000</li>
-                            <li>BBM ditanggung penyewa</li>
+                            <li>Harga sudah termasuk Driver + BBM + Mobil</li>
+                            <li>Khusus untuk City Tour Jogja</li>
                             <li>Overtime Rp 50.000/jam</li>
-                            <li>Denda keterlambatan Rp 100.000/hari</li>
                         </ul>
                     </div>
                 </div>
@@ -204,14 +207,13 @@ const startDate = document.getElementById('startDate');
 const endDate = document.getElementById('endDate');
 const pickupLocationSelect = document.getElementById('pickupLocation');
 
-// Price mapping - extract price from car name
+// Updated price mapping
 const carPrices = {
-    'Toyota Hiace Commuter': 1350000,
-    'Toyota Hiace Premio': 1450000,
+    'Toyota Hiace Commuter': 1200000,
+    'Toyota Hiace Premio': 1600000,
     'Toyota Avanza Facelift 2019': 600000,
     'Toyota All New Avanza 2024': 700000,
-    'Toyota Innova Reborn M/T': 700000,
-    'Toyota Innova Reborn A/T': 750000,
+    'Toyota Innova Reborn': 700000,
     'Toyota Innova Zenix': 900000,
     'Daihatsu Grand Max': 550000
 };
