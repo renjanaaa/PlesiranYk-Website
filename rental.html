@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental - Plesiran YK Rental Mobil</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>Plesiran YK</h2>
+                    <span>Rental Mobil</span>
+                </div>
+                <input type="checkbox" id="nav-toggle" class="nav-toggle">
+                <label for="nav-toggle" class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="cars.html">Our Cars</a></li>
+                    <li><a href="rental.html" class="active">Rental</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Rental Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Sewa Mobil</h1>
+            <p>Pilih mobil yang sesuai dengan kebutuhan perjalanan Anda</p>
+        </div>
+    </section>
+
+    <!-- Rental Form -->
+    <section class="rental-section">
+        <div class="container">
+            <div class="rental-container">
+                <div class="rental-form">
+                    <h2>Form Pemesanan</h2>
+                    <form action="https://wa.me/6285742467308" method="get" target="_blank">
+                        <div class="form-group">
+                            <label for="carSelect">Pilih Mobil</label>
+                            <select id="carSelect" name="text" required>
+                                <option value="">Pilih Mobil</option>
+                                <option value="Saya ingin menyewa Toyota Hiace Commuter - Rp 1.350.000/hari">Toyota Hiace Commuter - Rp 1.350.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Hiace Premio - Rp 1.450.000/hari">Toyota Hiace Premio - Rp 1.450.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Avanza Facelift 2019 - Rp 600.000/hari">Toyota Avanza Facelift 2019 - Rp 600.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota All New Avanza 2024 - Rp 700.000/hari">Toyota All New Avanza 2024 - Rp 700.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Innova Reborn M/T - Rp 700.000/hari">Toyota Innova Reborn M/T - Rp 700.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Innova Reborn A/T - Rp 750.000/hari">Toyota Innova Reborn A/T - Rp 750.000/hari</option>
+                                <option value="Saya ingin menyewa Toyota Innova Zenix - Rp 900.000/hari">Toyota Innova Zenix - Rp 900.000/hari</option>
+                                <option value="Saya ingin menyewa Daihatsu Grand Max - Rp 550.000/hari">Daihatsu Grand Max - Rp 550.000/hari</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="startDate">Tanggal Mulai</label>
+                                <input type="date" id="startDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">Tanggal Selesai</label>
+                                <input type="date" id="endDate" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerName">Nama Lengkap</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerPhone">Nomor Telepon</label>
+                            <input type="tel" id="customerPhone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerEmail">Email</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pickupLocation">Lokasi Penjemputan</label>
+                            <select id="pickupLocation" required>
+                                <option value="">Pilih Lokasi</option>
+                                <option value="office">Kantor Plesiran YK</option>
+                                <option value="airport">Bandara Yogyakarta International Airport (Tambahan 100.000)</option>
+                                <option value="station">Stasiun Besar Yogyakarta</option>
+                                <option value="station">Stasiun Lempuyangan</option>
+                                <option value="bus station">Terminal Giwangan</option>
+                                <option value="bus station">Terminal Jombor</option>
+                                <option value="hotel">Hotel (Biaya Tambahan menyesuaikan Jarak)</option>
+                                <option value="custom">Lokasi Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Catatan Tambahan</label>
+                            <textarea id="notes" rows="3" placeholder="Catatan khusus atau permintaan tambahan"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">Pesan via WhatsApp</button>
+                    </form>
+                </div>
+
+                <div class="rental-summary">
+                    <h3>Detail Pemesanan</h3>
+                    <div class="booking-details">
+                        <div class="detail-item">
+                            <span>Mobil Dipilih:</span>
+                            <span id="selectedCar">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Tanggal Sewa:</span>
+                            <span id="rentalDates">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Durasi:</span>
+                            <span id="rentalDuration">- hari</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Harga per Hari:</span>
+                            <span id="dailyPrice">Rp -</span>
+                        </div>
+                        <div class="detail-item total">
+                            <span>Total Harga:</span>
+                            <span id="totalPrice">Rp 0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Lokasi Penjemputan:</span>
+                            <span id="pickupLocationDisplay">-</span>
+                        </div>
+                    </div>
+
+                    <div class="rental-terms">
+                        <h4>Syarat & Ketentuan:</h4>
+                        <ul>
+                            <li>KTP dan SIM A masih berlaku</li>
+                            <li>Deposit Rp 500.000</li>
+                            <li>BBM ditanggung penyewa</li>
+                            <li>Overtime Rp 50.000/jam</li>
+                            <li>Denda keterlambatan Rp 100.000/hari</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Plesiran YK Rental Mobil</h3>
+                    <p>Solusi terpercaya untuk kebutuhan rental mobil Anda di Yogyakarta.</p>
+                    <div class="social-links">
+                        <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/6285742467308" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak Kami</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Jl Ngrompang Banyon, RT 92 Kel. Pendowo<br>Kec. Sewon Kab. Bantul Yogyakarta 55271</p>
+                        <p><i class="fas fa-phone"></i> +62 857-4246-7308</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Lokasi Kami</h4>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.1234567890!2d110.3260056!3d-7.8496283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af9e51c036cff%3A0x29f56ad87cf87a40!2sGembel%20Transport!5e0!3m2!1sen!2sid!4v1640000000000!5m2!1sen!2sid"
+                            width="100%" 
+                            height="200" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            title="Lokasi Plesiran YK Rental Mobil - Gembel Transport">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plesiran YK Rental Mobil. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// Update booking details dynamically
+const carSelect = document.getElementById('carSelect');
+const startDate = document.getElementById('startDate');
+const endDate = document.getElementById('endDate');
+const pickupLocationSelect = document.getElementById('pickupLocation');
+
+// Price mapping - extract price from car name
+const carPrices = {
+    'Toyota Hiace Commuter': 1350000,
+    'Toyota Hiace Premio': 1450000,
+    'Toyota Avanza Facelift 2019': 600000,
+    'Toyota All New Avanza 2024': 700000,
+    'Toyota Innova Reborn M/T': 700000,
+    'Toyota Innova Reborn A/T': 750000,
+    'Toyota Innova Zenix': 900000,
+    'Daihatsu Grand Max': 550000
+};
+
+function updateBookingDetails() {
+    const selectedCarOption = carSelect.options[carSelect.selectedIndex];
+    const selectedCarText = selectedCarOption.text;
+    const carName = selectedCarText.split(' - ')[0];
+    const startDateValue = startDate.value;
+    const endDateValue = endDate.value;
+    const pickupLocationOption = pickupLocationSelect.options[pickupLocationSelect.selectedIndex];
+    const pickupLocationText = pickupLocationOption.text;
+    
+    // Update selected car
+    document.getElementById('selectedCar').textContent = carName || '-';
+    
+    // Update pickup location
+    if (pickupLocationSelect.value && pickupLocationText !== 'Pilih Lokasi') {
+        document.getElementById('pickupLocationDisplay').textContent = pickupLocationText;
+    } else {
+        document.getElementById('pickupLocationDisplay').textContent = '-';
+    }
+    
+    // Update rental dates
+    if (startDateValue && endDateValue) {
+        // Format dates to Indonesian format
+        const startFormatted = new Date(startDateValue).toLocaleDateString('id-ID');
+        const endFormatted = new Date(endDateValue).toLocaleDateString('id-ID');
+        document.getElementById('rentalDates').textContent = `${startFormatted} s/d ${endFormatted}`;
+    } else if (startDateValue) {
+        const startFormatted = new Date(startDateValue).toLocaleDateString('id-ID');
+        document.getElementById('rentalDates').textContent = `${startFormatted} s/d -`;
+    } else {
+        document.getElementById('rentalDates').textContent = '-';
+    }
+    
+    // Calculate duration and prices
+    if (startDateValue && endDateValue) {
+        const start = new Date(startDateValue);
+        const end = new Date(endDateValue);
+        const timeDiff = end.getTime() - start.getTime();
+        const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        
+        if (dayDiff > 0) {
+            document.getElementById('rentalDuration').textContent = `${dayDiff} hari`;
+            
+            // Calculate price if car is selected
+            if (carName && carPrices[carName]) {
+                const dailyPrice = carPrices[carName];
+                const totalPrice = dailyPrice * dayDiff;
+                
+                document.getElementById('dailyPrice').textContent = `Rp ${dailyPrice.toLocaleString('id-ID')}`;
+                document.getElementById('totalPrice').textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            } else {
+                document.getElementById('dailyPrice').textContent = 'Rp -';
+                document.getElementById('totalPrice').textContent = 'Rp 0';
+            }
+        } else {
+            resetDurationAndPrice();
+        }
+    } else {
+        resetDurationAndPrice();
+        
+        // Still show daily price if car is selected
+        if (carName && carPrices[carName]) {
+            const dailyPrice = carPrices[carName];
+            document.getElementById('dailyPrice').textContent = `Rp ${dailyPrice.toLocaleString('id-ID')}`;
+        } else {
+            document.getElementById('dailyPrice').textContent = 'Rp -';
+        }
+    }
+}
+
+function resetDurationAndPrice() {
+    document.getElementById('rentalDuration').textContent = '- hari';
+    document.getElementById('totalPrice').textContent = 'Rp 0';
+}
+
+// Set minimum date to today
+const today = new Date().toISOString().split('T')[0];
+startDate.setAttribute('min', today);
+endDate.setAttribute('min', today);
+
+// Update end date minimum when start date changes
+startDate.addEventListener('change', function() {
+    endDate.setAttribute('min', this.value);
+    if (endDate.value && endDate.value < this.value) {
+        endDate.value = '';
+    }
+    updateBookingDetails();
+});
+
+// Add event listeners
+carSelect.addEventListener('change', updateBookingDetails);
+endDate.addEventListener('change', updateBookingDetails);
+pickupLocationSelect.addEventListener('change', updateBookingDetails);
+
+// Initial update
+updateBookingDetails();
+</script>
+</body>
+</html>
