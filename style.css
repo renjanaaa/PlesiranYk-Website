@@ -330,7 +330,8 @@
     margin-bottom: 4rem;
   }
   
-  /* Fixed width for Low MPV to maintain size */
+  /* Fixed width for MPV and Low MPV to maintain consistent size */
+  .cars-grid.mpv,
   .cars-grid.low-mpv {
     grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
     justify-content: center;
@@ -1019,4 +1020,3 @@
       color: black;
     }
   }
-  
