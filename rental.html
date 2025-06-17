@@ -51,18 +51,18 @@
             <div class="rental-container">
                 <div class="rental-form">
                     <h2>Form Pemesanan</h2>
-                    <form action="https://wa.me/6285742467308" method="get" target="_blank">
+                    <form id="rentalForm">
                         <div class="form-group">
                             <label for="carSelect">Pilih Mobil</label>
-                            <select id="carSelect" name="text" required>
+                            <select id="carSelect" required>
                                 <option value="">Pilih Mobil</option>
-                                <option value="Saya ingin menyewa Toyota Hiace Commuter - Rp 1.200.000/hari" data-car="Toyota Hiace Commuter" data-price="1200000">Toyota Hiace Commuter - Rp 1.200.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Hiace Premio - Rp 1.600.000/hari" data-car="Toyota Hiace Premio" data-price="1600000">Toyota Hiace Premio - Rp 1.600.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Avanza Facelift 2019 - Rp 600.000/hari" data-car="Toyota Avanza Facelift 2019" data-price="600000">Toyota Avanza Facelift 2019 - Rp 600.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota All New Avanza 2024 - Rp 700.000/hari" data-car="Toyota All New Avanza 2024" data-price="700000">Toyota All New Avanza 2024 - Rp 700.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Innova Reborn - Rp 700.000/hari" data-car="Toyota Innova Reborn" data-price="700000">Toyota Innova Reborn - Rp 700.000/hari</option>
-                                <option value="Saya ingin menyewa Toyota Innova Zenix - Rp 900.000/hari" data-car="Toyota Innova Zenix" data-price="900000">Toyota Innova Zenix - Rp 900.000/hari</option>
-                                <option value="Saya ingin menyewa Daihatsu Grand Max - Rp 550.000/hari" data-car="Daihatsu Grand Max" data-price="550000">Daihatsu Grand Max - Rp 550.000/hari</option>
+                                <option value="hiace-commuter" data-car="Toyota Hiace Commuter" data-price="1200000">Toyota Hiace Commuter - Rp 1.200.000/hari</option>
+                                <option value="hiace-premio" data-car="Toyota Hiace Premio" data-price="1600000">Toyota Hiace Premio - Rp 1.600.000/hari</option>
+                                <option value="avanza-2019" data-car="Toyota Avanza Facelift 2019" data-price="600000">Toyota Avanza Facelift 2019 - Rp 600.000/hari</option>
+                                <option value="avanza-2024" data-car="Toyota All New Avanza 2024" data-price="700000">Toyota All New Avanza 2024 - Rp 700.000/hari</option>
+                                <option value="innova-reborn" data-car="Toyota Innova Reborn" data-price="700000">Toyota Innova Reborn - Rp 700.000/hari</option>
+                                <option value="innova-zenix" data-car="Toyota Innova Zenix" data-price="900000">Toyota Innova Zenix - Rp 900.000/hari</option>
+                                <option value="grand-max" data-car="Daihatsu Grand Max" data-price="550000">Daihatsu Grand Max - Rp 550.000/hari</option>
                             </select>
                         </div>
 
@@ -89,22 +89,42 @@
 
                         <div class="form-group">
                             <label for="customerEmail">Email</label>
-                            <input type="email" id="customerEmail" required>
+                            <input type="email" id="customerEmail">
                         </div>
 
                         <div class="form-group">
                             <label for="pickupLocation">Lokasi Penjemputan</label>
                             <select id="pickupLocation" required>
                                 <option value="">Pilih Lokasi</option>
-                                <option value="office">Kantor Plesiran YK</option>
-                                <option value="airport">Bandara Yogyakarta International Airport (Tambahan 100.000)</option>
-                                <option value="station">Stasiun Besar Yogyakarta</option>
-                                <option value="station">Stasiun Lempuyangan</option>
-                                <option value="bus station">Terminal Giwangan</option>
-                                <option value="bus station">Terminal Jombor</option>
-                                <option value="hotel">Hotel (Biaya Tambahan menyesuaikan Jarak)</option>
-                                <option value="custom">Lokasi Lainnya</option>
+                                <option value="office" data-cost="0">Kantor Plesiran YK</option>
+                                <option value="airport" data-cost="100000">Bandara Yogyakarta International Airport (Tambahan 100.000)</option>
+                                <option value="station" data-cost="0">Stasiun Besar Yogyakarta</option>
+                                <option value="station" data-cost="0">Stasiun Lempuyangan</option>
+                                <option value="bus station" data-cost="0">Terminal Giwangan</option>
+                                <option value="bus station" data-cost="0">Terminal Jombor</option>
+                                <option value="hotel" data-cost="0">Hotel (Biaya Tambahan menyesuaikan Jarak)</option>
+                                <option value="custom" data-cost="0">Lokasi Lainnya</option>
                             </select>
+                        </div>
+
+                        <!-- DP/Uang Muka Section -->
+                        <div class="form-group">
+                            <label for="dpOption">Pilihan DP/Uang Muka</label>
+                            <select id="dpOption" required>
+                                <option value="">Pilih DP</option>
+                                <option value="30">DP 30% dari Total Harga</option>
+                                <option value="50">DP 50% dari Total Harga</option>
+                                <option value="deposit">DP Deposit Saja (Rp 500.000)</option>
+                                <option value="full">Bayar Lunas</option>
+                                <option value="custom">DP Custom</option>
+                            </select>
+                        </div>
+
+                        <!-- Custom DP Amount (hidden by default) -->
+                        <div class="form-group" id="customDpGroup" style="display: none;">
+                            <label for="customDpAmount">Jumlah DP Custom</label>
+                            <input type="number" id="customDpAmount" placeholder="Masukkan jumlah DP" min="0">
+                            <small style="color: #666; font-size: 0.9rem;">Masukkan nominal DP yang diinginkan</small>
                         </div>
 
                         <div class="form-group">
@@ -135,13 +155,23 @@
                             <span>Harga per Hari:</span>
                             <span id="dailyPrice">Rp -</span>
                         </div>
+                        <div class="detail-item">
+                            <span>Lokasi Penjemputan:</span>
+                            <span id="pickupLocationDisplay">-</span>
+                        </div>
                         <div class="detail-item total">
                             <span>Total Harga:</span>
                             <span id="totalPrice">Rp 0</span>
                         </div>
-                        <div class="detail-item">
-                            <span>Lokasi Penjemputan:</span>
-                            <span id="pickupLocationDisplay">-</span>
+                        
+                        <!-- DP Information -->
+                        <div class="detail-item" id="dpInfo" style="display: none;">
+                            <span>DP/Uang Muka:</span>
+                            <span id="dpAmount">Rp 0</span>
+                        </div>
+                        <div class="detail-item" id="remainingInfo" style="display: none;">
+                            <span>Sisa Pembayaran:</span>
+                            <span id="remainingAmount">Rp 0</span>
                         </div>
                     </div>
 
@@ -153,6 +183,8 @@
                             <li>Harga sudah termasuk Driver + BBM + Mobil</li>
                             <li>Khusus untuk City Tour Jogja</li>
                             <li>Overtime Rp 50.000/jam</li>
+                            <li>DP/Uang muka wajib dibayar untuk konfirmasi booking</li>
+                            <li>Sisa pembayaran dibayar saat penjemputan</li>
                         </ul>
                     </div>
                 </div>
@@ -201,101 +233,289 @@
     </footer>
 
     <script>
-// Update booking details dynamically
-const carSelect = document.getElementById('carSelect');
-const startDate = document.getElementById('startDate');
-const endDate = document.getElementById('endDate');
-const pickupLocationSelect = document.getElementById('pickupLocation');
+        // Elements
+        const carSelect = document.getElementById('carSelect');
+        const startDate = document.getElementById('startDate');
+        const endDate = document.getElementById('endDate');
+        const customerName = document.getElementById('customerName');
+        const customerPhone = document.getElementById('customerPhone');
+        const customerEmail = document.getElementById('customerEmail');
+        const pickupLocationSelect = document.getElementById('pickupLocation');
+        const dpOption = document.getElementById('dpOption');
+        const customDpGroup = document.getElementById('customDpGroup');
+        const customDpAmount = document.getElementById('customDpAmount');
+        const notes = document.getElementById('notes');
+        const rentalForm = document.getElementById('rentalForm');
 
-function updateBookingDetails() {
-    const selectedOption = carSelect.options[carSelect.selectedIndex];
-    const carName = selectedOption.getAttribute('data-car');
-    const carPrice = parseInt(selectedOption.getAttribute('data-price')) || 0;
-    
-    const startDateValue = startDate.value;
-    const endDateValue = endDate.value;
-    const pickupLocationOption = pickupLocationSelect.options[pickupLocationSelect.selectedIndex];
-    const pickupLocationText = pickupLocationOption.text;
-    
-    // Update selected car
-    document.getElementById('selectedCar').textContent = carName || '-';
-    
-    // Update pickup location
-    if (pickupLocationSelect.value && pickupLocationText !== 'Pilih Lokasi') {
-        document.getElementById('pickupLocationDisplay').textContent = pickupLocationText;
-    } else {
-        document.getElementById('pickupLocationDisplay').textContent = '-';
-    }
-    
-    // Update rental dates
-    if (startDateValue && endDateValue) {
-        const startFormatted = new Date(startDateValue).toLocaleDateString('id-ID');
-        const endFormatted = new Date(endDateValue).toLocaleDateString('id-ID');
-        document.getElementById('rentalDates').textContent = `${startFormatted} s/d ${endFormatted}`;
-    } else if (startDateValue) {
-        const startFormatted = new Date(startDateValue).toLocaleDateString('id-ID');
-        document.getElementById('rentalDates').textContent = `${startFormatted} s/d -`;
-    } else {
-        document.getElementById('rentalDates').textContent = '-';
-    }
-    
-    // Show daily price if car is selected
-    if (carPrice > 0) {
-        document.getElementById('dailyPrice').textContent = `Rp ${carPrice.toLocaleString('id-ID')}`;
-    } else {
-        document.getElementById('dailyPrice').textContent = 'Rp -';
-    }
-    
-    // Calculate duration and total price
-    if (startDateValue && endDateValue && carPrice > 0) {
-        const start = new Date(startDateValue);
-        const end = new Date(endDateValue);
-        
-        // Calculate days difference - minimum 1 day for same day rental
-        const timeDiff = end.getTime() - start.getTime();
-        let dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        
-        // If same day (0 difference), treat as 1 day rental
-        if (dayDiff === 0) {
-            dayDiff = 1;
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        startDate.setAttribute('min', today);
+        endDate.setAttribute('min', today);
+
+        // Show/hide custom DP input
+        dpOption.addEventListener('change', function() {
+            if (this.value === 'custom') {
+                customDpGroup.style.display = 'block';
+                customDpAmount.required = true;
+            } else {
+                customDpGroup.style.display = 'none';
+                customDpAmount.required = false;
+                customDpAmount.value = '';
+            }
+            updateBookingDetails();
+        });
+
+        // Update end date minimum when start date changes
+        startDate.addEventListener('change', function() {
+            endDate.setAttribute('min', this.value);
+            if (endDate.value && endDate.value < this.value) {
+                endDate.value = '';
+            }
+            updateBookingDetails();
+        });
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
         }
-        
-        if (dayDiff > 0) {
-            document.getElementById('rentalDuration').textContent = `${dayDiff} hari`;
-            const totalPrice = carPrice * dayDiff;
-            document.getElementById('totalPrice').textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
-        } else {
-            // This should not happen with the fix above, but keeping as fallback
-            document.getElementById('rentalDuration').textContent = '- hari';
-            document.getElementById('totalPrice').textContent = 'Rp 0';
+
+        // Format date
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            return new Date(dateString).toLocaleDateString('id-ID', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
         }
-    } else {
-        document.getElementById('rentalDuration').textContent = '- hari';
-        document.getElementById('totalPrice').textContent = 'Rp 0';
-    }
-}
 
-// Set minimum date to today
-const today = new Date().toISOString().split('T')[0];
-startDate.setAttribute('min', today);
-endDate.setAttribute('min', today);
+        // Calculate DP amount
+        function calculateDP(totalPrice, dpType, customAmount = 0) {
+            switch(dpType) {
+                case '30':
+                    return Math.round(totalPrice * 0.3);
+                case '50':
+                    return Math.round(totalPrice * 0.5);
+                case 'deposit':
+                    return 500000; // Fixed deposit amount
+                case 'full':
+                    return totalPrice;
+                case 'custom':
+                    return parseInt(customAmount) || 0;
+                default:
+                    return 0;
+            }
+        }
 
-// Update end date minimum when start date changes
-startDate.addEventListener('change', function() {
-    endDate.setAttribute('min', this.value);
-    if (endDate.value && endDate.value < this.value) {
-        endDate.value = '';
-    }
-    updateBookingDetails();
-});
+        // Update booking details
+        function updateBookingDetails() {
+            const selectedOption = carSelect.options[carSelect.selectedIndex];
+            const carName = selectedOption.getAttribute('data-car');
+            const carPrice = parseInt(selectedOption.getAttribute('data-price')) || 0;
+            
+            const startDateValue = startDate.value;
+            const endDateValue = endDate.value;
+            const pickupLocationOption = pickupLocationSelect.options[pickupLocationSelect.selectedIndex];
+            const pickupLocationText = pickupLocationOption.text;
+            const pickupCost = parseInt(pickupLocationOption.getAttribute('data-cost')) || 0;
+            
+            // Update selected car
+            document.getElementById('selectedCar').textContent = carName || '-';
+            
+            // Update pickup location
+            document.getElementById('pickupLocationDisplay').textContent = 
+                pickupLocationSelect.value && pickupLocationText !== 'Pilih Lokasi' ? pickupLocationText : '-';
+            
+            // Update rental dates
+            if (startDateValue && endDateValue) {
+                document.getElementById('rentalDates').textContent = 
+                    `${formatDate(startDateValue)} s/d ${formatDate(endDateValue)}`;
+            } else if (startDateValue) {
+                document.getElementById('rentalDates').textContent = `${formatDate(startDateValue)} s/d -`;
+            } else {
+                document.getElementById('rentalDates').textContent = '-';
+            }
+            
+            // Show daily price
+            document.getElementById('dailyPrice').textContent = 
+                carPrice > 0 ? formatCurrency(carPrice) : 'Rp -';
+            
+            // Calculate duration and total price
+            if (startDateValue && endDateValue && carPrice > 0) {
+                const start = new Date(startDateValue);
+                const end = new Date(endDateValue);
+                const timeDiff = end.getTime() - start.getTime();
+                let dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                if (dayDiff === 0) dayDiff = 1; // Minimum 1 day
+                
+                if (dayDiff > 0) {
+                    document.getElementById('rentalDuration').textContent = `${dayDiff} hari`;
+                    const totalPrice = (carPrice * dayDiff) + pickupCost;
+                    document.getElementById('totalPrice').textContent = formatCurrency(totalPrice);
+                    
+                    // Calculate and show DP information
+                    if (dpOption.value) {
+                        const customAmount = dpOption.value === 'custom' ? customDpAmount.value : 0;
+                        const dpAmount = calculateDP(totalPrice, dpOption.value, customAmount);
+                        const remainingAmount = totalPrice - dpAmount;
+                        
+                        document.getElementById('dpAmount').textContent = formatCurrency(dpAmount);
+                        document.getElementById('remainingAmount').textContent = formatCurrency(remainingAmount);
+                        document.getElementById('dpInfo').style.display = 'flex';
+                        
+                        if (dpOption.value !== 'full') {
+                            document.getElementById('remainingInfo').style.display = 'flex';
+                        } else {
+                            document.getElementById('remainingInfo').style.display = 'none';
+                        }
+                    } else {
+                        document.getElementById('dpInfo').style.display = 'none';
+                        document.getElementById('remainingInfo').style.display = 'none';
+                    }
+                } else {
+                    document.getElementById('rentalDuration').textContent = '- hari';
+                    document.getElementById('totalPrice').textContent = 'Rp 0';
+                    document.getElementById('dpInfo').style.display = 'none';
+                    document.getElementById('remainingInfo').style.display = 'none';
+                }
+            } else {
+                document.getElementById('rentalDuration').textContent = '- hari';
+                document.getElementById('totalPrice').textContent = 'Rp 0';
+                document.getElementById('dpInfo').style.display = 'none';
+                document.getElementById('remainingInfo').style.display = 'none';
+            }
+        }
 
-// Add event listeners
-carSelect.addEventListener('change', updateBookingDetails);
-endDate.addEventListener('change', updateBookingDetails);
-pickupLocationSelect.addEventListener('change', updateBookingDetails);
+        // Generate WhatsApp message
+        function generateWhatsAppMessage() {
+            const selectedOption = carSelect.options[carSelect.selectedIndex];
+            const carName = selectedOption.getAttribute('data-car');
+            const carPrice = parseInt(selectedOption.getAttribute('data-price')) || 0;
+            
+            const pickupLocationOption = pickupLocationSelect.options[pickupLocationSelect.selectedIndex];
+            const pickupLocationText = pickupLocationOption.text;
+            const pickupCost = parseInt(pickupLocationOption.getAttribute('data-cost')) || 0;
+            
+            const dpOptionText = dpOption.options[dpOption.selectedIndex].text;
+            
+            // Calculate duration
+            const start = new Date(startDate.value);
+            const end = new Date(endDate.value);
+            const timeDiff = end.getTime() - start.getTime();
+            let dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            if (dayDiff === 0) dayDiff = 1;
+            
+            const totalPrice = (carPrice * dayDiff) + pickupCost;
+            const customAmount = dpOption.value === 'custom' ? customDpAmount.value : 0;
+            const dpAmount = calculateDP(totalPrice, dpOption.value, customAmount);
+            const remainingAmount = totalPrice - dpAmount;
+            
+            let message = `*PEMESANAN RENTAL MOBIL PLESIRAN YK*\n\n`;
+            
+            // Car Details
+            message += `🚗 *DETAIL MOBIL*\n`;
+            message += `Mobil: ${carName}\n`;
+            message += `Harga per hari: ${formatCurrency(carPrice)}\n\n`;
+            
+            // Rental Period
+            message += `📅 *PERIODE SEWA*\n`;
+            message += `Tanggal Mulai: ${formatDate(startDate.value)}\n`;
+            message += `Tanggal Selesai: ${formatDate(endDate.value)}\n`;
+            message += `Durasi: ${dayDiff} hari\n\n`;
+            
+            // Customer Information
+            message += `👤 *BIODATA PEMESAN*\n`;
+            message += `Nama: ${customerName.value}\n`;
+            message += `No. Telepon: ${customerPhone.value}\n`;
+            if (customerEmail.value) {
+                message += `Email: ${customerEmail.value}\n`;
+            }
+            message += `\n`;
+            
+            // Pickup Location
+            message += `📍 *LOKASI PENJEMPUTAN*\n`;
+            message += `${pickupLocationText}\n`;
+            if (pickupCost > 0) {
+                message += `(Biaya tambahan: ${formatCurrency(pickupCost)})\n`;
+            }
+            message += `\n`;
+            
+            // Payment Information
+            message += `💰 *DETAIL PEMBAYARAN*\n`;
+            message += `Total Harga: ${formatCurrency(totalPrice)}\n`;
+            message += `Pilihan DP: ${dpOptionText}\n`;
+            message += `DP/Uang Muka: ${formatCurrency(dpAmount)}\n`;
+            if (dpOption.value !== 'full') {
+                message += `Sisa Pembayaran: ${formatCurrency(remainingAmount)}\n`;
+            }
+            message += `\n`;
+            
+            // Additional Notes
+            if (notes.value.trim()) {
+                message += `📝 *CATATAN TAMBAHAN*\n`;
+                message += `${notes.value}\n\n`;
+            }
+            
+            // Terms and Conditions
+            message += `📋 *SYARAT & KETENTUAN*\n`;
+            message += `• Tidak Berlaku Lepas Kunci\n`;
+            message += `• Deposit Rp 500.000\n`;
+            message += `• Harga sudah termasuk Driver + BBM + Mobil\n`;
+            message += `• Khusus untuk City Tour Jogja\n`;
+            message += `• Overtime Rp 50.000/jam\n`;
+            message += `• DP/Uang muka wajib dibayar untuk konfirmasi booking\n`;
+            if (dpOption.value !== 'full') {
+                message += `• Sisa pembayaran dibayar saat penjemputan\n`;
+            }
+            message += `\n`;
+            
+            message += `Mohon konfirmasi ketersediaan mobil untuk tanggal tersebut. Terima kasih! 🙏`;
+            
+            return encodeURIComponent(message);
+        }
 
-// Initial update
-updateBookingDetails();
-</script>
+        // Form submission
+        rentalForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate required fields
+            if (!carSelect.value || !startDate.value || !endDate.value || 
+                !customerName.value || !customerPhone.value || !pickupLocationSelect.value || !dpOption.value) {
+                alert('Mohon lengkapi semua field yang wajib diisi!');
+                return;
+            }
+            
+            // Validate custom DP if selected
+            if (dpOption.value === 'custom' && (!customDpAmount.value || customDpAmount.value <= 0)) {
+                alert('Mohon masukkan jumlah DP custom yang valid!');
+                return;
+            }
+            
+            // Validate date range
+            if (new Date(endDate.value) < new Date(startDate.value)) {
+                alert('Tanggal selesai tidak boleh lebih awal dari tanggal mulai!');
+                return;
+            }
+            
+            // Generate and send WhatsApp message
+            const message = generateWhatsAppMessage();
+            const whatsappUrl = `https://wa.me/6285742467308?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // Add event listeners
+        carSelect.addEventListener('change', updateBookingDetails);
+        endDate.addEventListener('change', updateBookingDetails);
+        pickupLocationSelect.addEventListener('change', updateBookingDetails);
+        customDpAmount.addEventListener('input', updateBookingDetails);
+
+        // Initial update
+        updateBookingDetails();
+    </script>
 </body>
 </html>
